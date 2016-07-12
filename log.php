@@ -9,31 +9,33 @@
 ///var/log/siege.log
 
 //init arrays
-$ConnUsers = array();
+//$ConnUsers = array();
 $ResponseTime = array();
 $TransactionRate = array();
 $Errors = array();
 //Variables
-$Runs = 10;
-$IncAmount = 10;
+// $Runs = 10;
+// $IncAmount = 10;
 //$IncStop = 10; (probably not needed)
 
 //Default (dont edit)
-$IncStart = 1;
+// $IncStart = 1;
+
+
 
 //Create Array for Y-Axis concurrent Users.
-while ($IncStart <= $Runs) {
-
-	$IncAdd = $IncAmount * $IncStart;
-	array_push($ConnUsers, "$IncAdd");
-	$IncStart++;
-
-}
+//while ($IncStart <= $Runs) {
+//
+//	$IncAdd = $IncAmount * $IncStart;
+//	array_push($ConnUsers, "$IncAdd");
+//	$IncStart++;
+//
+//}
 //print_r(array_values($ConnUsers));
+//echo "$logfilepath";
 
-
-// Parse Logfile
-$txt_file    = file_get_contents('/var/log/siege.log');
+// Parse Logfile (import variable from conf.php)
+$txt_file    = file_get_contents($logfilepath);
 $rows        = explode("\n", $txt_file);
 // remove first row, and remove "," also remove empty elements.
 array_shift($rows);
@@ -41,7 +43,7 @@ $rows = (str_replace(",","",$rows));
 $rows = array_filter($rows);
 
 // print array
-// print_r(array_values($rows));
+//print_r(array_values($rows));
 
 foreach ($rows as $data) {
 //$row_data = explode(' ', $data);
@@ -88,8 +90,8 @@ include("TransactionGraph.php");
 //    }
 
 //    echo '<br />';
-
-
+//<!--
+//-->
 //}
 ?>
 <img src="images/ResponseGraph.png">

@@ -1,4 +1,7 @@
 <?php
+
+//This script will transfer variable $logfilepath
+
 $file = $_SERVER['HOME'] . "/.siege/siege.conf";
 
 if (!file_exists($file)) {
@@ -12,9 +15,6 @@ if (!file_exists($file)) {
 
 $searchfor = 'logfile';
 $contents = array();
-
-// the following line prevents the browser from parsing this as HTML.
-header('Content-Type: text/plain');
 
 // get the file contents, assuming the file to be readable (and exist)
 $rawcontents = file_get_contents($file);
