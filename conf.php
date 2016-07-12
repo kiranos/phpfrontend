@@ -48,7 +48,7 @@ $logfilepath = $array[2];
 
 if (!file_exists($logfilepath)) {
 //    echo "cant find $logfilepath, please use full path in configfile (no environment variables)";
-    exit("cant find $logfilepath, please use full path in $file (no environment variables)");
+    exit("cant find $logfilepath, please use full path in $file (no environment variables) and that logging = true");
 }
 ?>
 
