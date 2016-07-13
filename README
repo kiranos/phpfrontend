@@ -3,3 +3,10 @@ http://stackoverflow.com/questions/33628918/disabling-output-buffer-with-apache-
 fix so this is set
 show-logfile = false
 
+fix so if numeric values is not entered say so :D
+
+
+
+mbstring needed for mb_convert_encoding
+
+php7.0-gd for graphs

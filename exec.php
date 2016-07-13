@@ -1,5 +1,11 @@
 <?php
+include ("preflight.php"); //retrive logfile path
 
+// show realtime output of siege
+header('X-Accel-Buffering: no');
+ob_end_clean();
+ob_implicit_flush(true);
+flush();
 //init arrays
 $ConnUsers = array();
 
@@ -11,38 +17,31 @@ $Time = $_POST["time"];
 //Default dont edit
 $IncStart = 1;
 
-//REMOVE
-//echo "$Runs <br>";
-//echo "$IncStart <br>";
-//echo "$IncAmount <br>";
-
-
 if (is_numeric($Delay) && is_numeric($IncAmount) && is_numeric($Runs) && is_numeric($NumFirstRun) && is_numeric($Time)) {
+
+//check so urls.txt exist
+$urlfilepath = $_SERVER['DOCUMENT_ROOT'] . "/urls.txt";
+if (!file_exists($urlfilepath)) {
+    exit("urls.txt is not present");
+}
+$file = 'urls.txt';
+$urls = file_get_contents($file);
+echo "now running loadtest on following urls: $urls";
 
 $IncAdd = $NumFirstRun;
 array_push($ConnUsers, "$IncAdd");
 
 	while ($IncStart <= $Runs) {
-
+		echo "run $IncStart";
 	        $IncAdd = $IncAmount + $IncAdd;
 		array_push($ConnUsers, "$IncAdd");
-		$exec = "siege -d".$Delay." -c".$IncAdd." -t".$Time."M http://eriksson.cn";
-	//        system($exec);
-	//	echo "$exec <br>";
-//		print_r(array_values($ConnUsers));
-		//REMOVE
-//		echo "$Runs <br>";
-//		echo "$IncStart <br>";
-//		echo "$IncAmount <br>";
+		$exec = "siege -f urls.txt -d".$Delay." -c".$IncAdd." -t".$Time."M -i";
+	        system($exec);
+		flush();
 	        $IncStart++;
 	}
 
-//	print_r(array_values($ConnUsers));
-	include ("conf.php"); //retrive logfile path
-        include ("log.php"); //generate graphs from logfile
-
-
-
+//        include ("log.php"); //generate graphs from logfile
 }
 
 ?>
