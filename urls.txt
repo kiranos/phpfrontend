@@ -1,3 +1,4 @@
-http://google.se
-http://google.com
-
+http://magento.geeklove.se
+http://magento.geeklove.se/media/
+http://magento.geeklove.se/media2/
+http://magento.geeklove.se/media4/

@@ -1,4 +1,13 @@
+<html>
+<head>
+<title>CSS Example</title>
+<link rel="stylesheet" href="style.css"
+</title>
+</head>
+<body>
 <?php
+// include the menu
+include ("menu.html");
 
 // configuration
 $url = $_SERVER['REQUEST_URI'];
@@ -20,16 +29,17 @@ if (isset($_POST['text'])) {
 
     // redirect to form again
     header(sprintf('Location: %s', $url));
-    printf('<a href="%s">Moved</a>.', htmlspecialchars($url));
-    exit();
 }
 
 // read the textfile
 $text = file_get_contents($file);
 ?>
 
-<!-- HTML form -->
+Fill out urls to load <br>
 <form action="" method="post">
 <textarea name="text"><?php echo htmlspecialchars($text) ?></textarea>
 <br><input type="submit" />
 </form>
+
+</body>
+</html>

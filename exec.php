@@ -1,4 +1,13 @@
+<html>
+<head>
+<title>CSS Example</title>
+    <link rel="stylesheet" href="style.css">
+</title>
+</head>
+<body>
+
 <?php
+include ("menu.html"); // include the menu
 include ("preflight.php"); //retrive logfile path
 
 // show realtime output of siege
@@ -41,7 +50,7 @@ array_push($ConnUsers, "$IncAdd");
 	        $IncStart++;
 	}
 
-//        include ("log.php"); //generate graphs from logfile
+//        include ("parselog.php"); //generate graphs from logfile
 }
 
 ?>
@@ -61,3 +70,7 @@ Duration of each run (mins):<br>
 <input type="text" name="time" value="1" /><br>
 <input type="submit" value="run siege">
 </form>
+
+</body>
+</html>
+
