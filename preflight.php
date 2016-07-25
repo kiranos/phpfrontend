@@ -13,6 +13,11 @@ if (!file_exists($file)) {
     exit("no siege config file is present, create one with siege.config.");
 }
 
+//check if logs/ directory exists and is writeable as this will be used to generate logfiles.
+if (!is_writable("logs/")) {
+    exit("The folder logs/ is not writable.");
+}
+
 $searchfor = 'logfile';
 $contents = array();
 

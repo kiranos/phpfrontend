@@ -15,8 +15,8 @@ $file = 'urls.txt';
 
 // check if form has been submitted
 if (isset($_POST['text'])) {
-
-	$urls = explode("\n", $_POST['text']);
+$trimmed = rtrim($_POST['text']);
+	$urls = explode("\n", $trimmed);
 	foreach ($urls as $data) {
 		$data = rtrim($data);
         	if (filter_var($data, FILTER_VALIDATE_URL) === FALSE) {
@@ -25,7 +25,7 @@ if (isset($_POST['text'])) {
 	}
 
     // save the text contents
-    file_put_contents($file, $_POST['text']);
+    file_put_contents($file, $trimmed);
 
     // redirect to form again
     header(sprintf('Location: %s', $url));

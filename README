@@ -10,3 +10,20 @@ fix so if numeric values is not entered say so :D
 mbstring needed for mb_convert_encoding
 
 php7.0-gd for graphs
+
+
+- run = rows in logfile otherwise fail : done in mysql branch
+- custom log file, and create folder, check if writable. 
+ - http://stackoverflow.com/questions/109188/how-do-i-check-if-a-directory-is-writeable-in-php
+ - http://stackoverflow.com/questions/2303372/create-a-folder-if-it-doesnt-already-exist
+
+//get last jobid to use in current run
+SELECT MAX(jobid) FROM jobs; 
+
+MYSQL SCHEMA
+CREATE TABLE jobs (jobid INT NOT NULL AUTO_INCREMENT PRIMARY KEY, Name VARCHAR(48) UNIQUE NOT NULL, Delay INT NOT NULL, IncAmount INT NOT NULL, Runs INT NOT NULL, NumFirstRun INT NOT NULL, Time INT NOT NULL, Rundate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ) ;
+CREATE TABLE statistics (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, jobid INT NOT NULL, ConnUsers INT NOT NULL, ResponseTime FLOAT NOT NULL, TransactionRate FLOAT NOT NULL, Errors INT NOT NULL, FOREIGN KEY (jobid) REFERENCES jobs(jobid)) ;
+
+
+- Dont use INT as its FLOAT ^ fix
+- http://php.net/manual/en/pdo.errorinfo.php

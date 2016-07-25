@@ -1,8 +1,7 @@
-
 <?php
 
-header('X-Accel-Buffering: no');
-ob_end_clean();
+//header('X-Accel-Buffering: no');
+//ob_end_clean();
 ob_implicit_flush(true);
 flush();
 
@@ -14,7 +13,7 @@ function myFilter($string) {
 }
 
 
-$cmd = "siege -v -c2 -t3M -d10 eriksson.cn";
+$cmd = "siege -v -c2 -t30S -d10 eriksson.cn";
 //$cmd = "ping 127.0.0.1";
 $descriptorspec = array(
    0 => array("pipe", "r"),   // stdin is a pipe that the child will read from
@@ -51,12 +50,6 @@ if (is_resource($process)) {
 		}
 		flush();
        }
-
-
-
-
-
-
         flush();
     }
 }
