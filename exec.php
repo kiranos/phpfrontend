@@ -10,7 +10,12 @@
 include ("menu.html"); // include the menu
 include ("preflight.php"); //retrive logfile path
 
-$pdo = new PDO('mysql:host=127.0.0.1;dbname=siege', '', '');
+$ini_array = parse_ini_file("config.ini");
+$db = $ini_array['db'];
+$host = $ini_array['host'];
+$user = $ini_array['user'];
+$pass = $ini_array['pass'];
+$pdo = new PDO("mysql:host=$host;dbname=$db", "$user", "$pass");
 
 // show realtime output of siege
 header('X-Accel-Buffering: no');

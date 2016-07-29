@@ -23,7 +23,28 @@ SELECT MAX(jobid) FROM jobs;
 MYSQL SCHEMA
 CREATE TABLE jobs (jobid INT NOT NULL AUTO_INCREMENT PRIMARY KEY, Name VARCHAR(48) UNIQUE NOT NULL, Delay INT NOT NULL, IncAmount INT NOT NULL, Runs INT NOT NULL, NumFirstRun INT NOT NULL, Time INT NOT NULL, Rundate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ) ;
 CREATE TABLE statistics (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, jobid INT NOT NULL, ConnUsers INT NOT NULL, ResponseTime FLOAT NOT NULL, TransactionRate FLOAT NOT NULL, Errors INT NOT NULL, FOREIGN KEY (jobid) REFERENCES jobs(jobid)) ;
+//WORK IN PROGRESS:
+CREATE TABLE jobstatus (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, jobid INT NOT NULL, LastUpdate INT NOT NULL, STATUS VARCHAR(48) NOT NULL, NumRunsCompleted INT NOT NULL, FOREIGN KEY (jobid) REFERENCES jobs(jobid)) ;
+-status=notstarted,running,completed|failed 
 
 
 - Dont use INT as its FLOAT ^ fix
 - http://php.net/manual/en/pdo.errorinfo.php
+
+
+mysql> select * from jobs NATURAL JOIN statistics WHERE jobs.jobid = statistics.jobid AND Name = 'test2';
+
+- https://hmp.is.it/update-browser-status-ajax-process/
+
+#PRGORESS TABLE:
+
+## BASH SCRIPT TO EXECUTE SIEGE
+
+- input vars: jobid, number of times to run, incamount, start amount.
+- include file: mysql credentials:
+- output status to mysql for run.
+- schema shall include date to find long running jobs.
+- http://stackoverflow.com/questions/8993655/can-a-bash-script-run-simultaneous-commands-then-wait-for-them-to-complete
+
+In forms fix:
+http://stackoverflow.com/questions/10613570/undefined-index-error-php
