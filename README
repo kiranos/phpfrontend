@@ -48,3 +48,14 @@ mysql> select * from jobs NATURAL JOIN statistics WHERE jobs.jobid = statistics.
 
 In forms fix:
 http://stackoverflow.com/questions/10613570/undefined-index-error-php
+
+
+SELECT:
+
+//$select = $pdo->query("SELECT * FROM jobs");
+//while ($row = $select->fetch(PDO::FETCH_ASSOC)) {
+//
+//    echo "jobid: " . $row['jobid'] . " firstrun: " . $row['NumFirstRun'] . "<br />";
+//
+//}
+

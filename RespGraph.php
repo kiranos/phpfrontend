@@ -3,9 +3,21 @@
  /* CAT:Line chart */
 
  /* pChart library inclusions */
-// include("pChart/class/pData.class.php");
-// include("pChart/class/pDraw.class.php");
-// include("pChart/class/pImage.class.php");
+include("pChart/class/pData.class.php");
+include("pChart/class/pDraw.class.php");
+include("pChart/class/pImage.class.php");
+include("db.php");
+
+$ConnUsers = array();
+$ResponseTime = array();
+
+// Retrieve result from statistics table
+$res = $pdo->query("SELECT ConnUsers,ResponseTime FROM statistics where jobid = 35");
+while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+    array_push($ConnUsers, $row['ConnUsers']);
+    array_push($ResponseTime, $row['ResponseTime']);
+}
+$res = null;
 
  /* Create and populate the pData object */
  $MyData = new pData();

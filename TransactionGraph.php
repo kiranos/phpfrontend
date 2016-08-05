@@ -3,10 +3,21 @@
  /* CAT:Line chart */
 
  /* pChart library inclusions */
-// include("pChart/class/pData.class.php");
-// include("pChart/class/pDraw.class.php");
-// include("pChart/class/pImage.class.php");
+include("pChart/class/pData.class.php");
+include("pChart/class/pDraw.class.php");
+include("pChart/class/pImage.class.php");
+include("db.php");
 
+$ConnUsers = array();
+$TransactionRate = array();
+
+// Retrieve result from statistics table
+$res = $pdo->query("SELECT ConnUsers,TransactionRate FROM statistics where jobid = 35");
+while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+    array_push($ConnUsers, $row['ConnUsers']);
+    array_push($TransactionRate, $row['TransactionRate']);
+}
+$res = null;
  /* Create and populate the pData object */
  $MyData = new pData();
 // $MyData->addPoints(array(3000,10000,13000,7000,9000),"X-axis");
